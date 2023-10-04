@@ -2,7 +2,7 @@ import './App.scss';
 import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import MovieDetail from "./components/MovieDetail/MovieDetail"
 function App() {
@@ -15,6 +15,7 @@ function App() {
         <Route path="*" element = {<PageNotFound/>}/>
 
       </Routes>
+      
       <Footer />
     </div>
   );

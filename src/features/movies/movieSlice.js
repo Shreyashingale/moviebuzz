@@ -1,25 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-
 const initialState = {
-    movies : [],
+     movies : {},
 }
 
+const movieSlice = createSlice({
 
-export const movieSlice = createSlice({
-
-    name : "movies",
+    name :"movies",
     initialState,
-    reducers:{
-        //here action.payload but we have destrctured it read it and also spread operator
-        addMovies :(state,{payload})=>{
-            state.movies = payload;
+    reducers : {
+        //learn array destrucuting and spread operator
+        addMovies : (state , action) =>{
+            state.movies = action.payload;
         },
     },
+});
 
-})
 
-
-export const {addMovies}  = movieSlice.actions;
-export const getAllMovies = (state)=>state.movies.movies;
+export const {addMovies} = movieSlice.actions;
 export default movieSlice.reducer;
