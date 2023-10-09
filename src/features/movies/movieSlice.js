@@ -4,6 +4,7 @@ import { APIKEY } from "../../common/api/MovieApiKey";
 const initialState = {
     movies: {},
     shows :{},
+    detailedMovieOrShow : {},
 }
 
 
@@ -31,6 +32,21 @@ export const fetchAsyncShows = createAsyncThunk(
             return response.data;
     }
 )
+
+export const fetchAsyncMoviesOrShowDetail = createAsyncThunk(
+    
+    'movies/fetchAsyncMoviesOrShowDetail' , 
+    async(imdbID)=> {
+        console.log("in function");
+        const response = await movieApi.get(`?apiKey=${APIKEY}&i=${imdbID}`)
+        .catch((error)=>{
+            console.log(error);
+        });
+
+        return response.data;
+
+    }
+)
 const movieSlice = createSlice({
 
     name: "movies",
@@ -39,6 +55,9 @@ const movieSlice = createSlice({
         //learn array destrucuting and spread operator
         addMovies: (state, action) => {
             state.movies = action.payload;
+        },
+        removeSelectedMovieOrShow :(state,action)=>{
+            state.detailedMovieOrShow = {};
         },
     },
     extraReducers :{
@@ -63,10 +82,19 @@ const movieSlice = createSlice({
         },
         [fetchAsyncShows.rejected]:()=>{
             console.log("Rejected");    
+        },
+        [fetchAsyncMoviesOrShowDetail.pending]:()=>{
+            console.log("Pending");
+        },
+        [fetchAsyncMoviesOrShowDetail.fulfilled] : (state , action)=>{
+            state.detailedMovieOrShow = action.payload;
+        },
+        [fetchAsyncMoviesOrShowDetail.rejected]:()=>{
+            console.log("Rejected");
         }
     }
 });
 
 
-export const { addMovies } = movieSlice.actions;
+export const { removeSelectedMovieOrShow } = movieSlice.actions;
 export default movieSlice.reducer;
