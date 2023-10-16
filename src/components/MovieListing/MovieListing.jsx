@@ -8,6 +8,8 @@ const MovieListing = () => {
     const showsData = useSelector((state)=>state.movies.shows);
     let renderMovies = "";
     let renderShows = "";
+    console.log("movies data");
+    console.log(moviesData);
     renderMovies = moviesData.Response === "True" ?
         (   /*
             when need to return use => ()  when need to write to js use=> {}

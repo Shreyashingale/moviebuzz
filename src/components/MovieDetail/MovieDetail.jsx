@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {fetchAsyncMoviesOrShowDetail} from '../../features/movies/movieSlice';
 import removeSelectedMovieOrShow from '../../features/movies/movieSlice';
+import {Link} from 'react-router-dom';
 const MovieDetail = ()=>{
     let {imdbId} = useParams();
     const dispatch = useDispatch();
@@ -13,12 +14,16 @@ const MovieDetail = ()=>{
         dispatch(fetchAsyncMoviesOrShowDetail(imdbId))
 
         return (()=>{
-            dispatch(removeSelectedMovieOrShow());
+            console.log("called back");
+            dispatch(fetchAsyncMoviesOrShowDetail());
         })
     } , [dispatch,imdbId] );
     return(
 
         <>
+        {/* React Link tag changes the url but doesnt render the component */}
+        <button></button>
+        <Link to="/">Home</Link>
         <div>
             <h2>{movieOrShowDetails.Title}</h2>
             <img src={movieOrShowDetails.Poster} alt="" />

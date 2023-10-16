@@ -7,7 +7,7 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 import MovieDetail from "./components/MovieDetail/MovieDetail"
 function App() {
   return (
-    <div className="App">
+    <div className="App"> 
       <Header />
       <Routes>
         <Route path="/" element = {<Home/>}/>
